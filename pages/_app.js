@@ -1,5 +1,9 @@
 import App from 'next/app'
-import Layout from '../components/layout.js'
+import Layout from '../components/layout.js';
+import Amplify from "aws-amplify";
+import awsExports from "../src/aws-exports";
+Amplify.configure(awsExports);
+
 /*
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import awsconfig from '../src/aws-exports';

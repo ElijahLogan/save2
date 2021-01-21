@@ -1,9 +1,12 @@
 /* src/App.js */
 import React, { useEffect, useState } from 'react'
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { createTodo } from '../src/graphql/mutations'
-import { listTodos } from '../src/graphql/queries'
-;
+import { createTodo, updateTodo, deleteTodo } from '../src/graphql/mutations';
+import { listTodos } from '../src/graphql/queries';
+import awsmobile from "../src/aws-exports";
+Amplify.configure(awsmobile);
+
+
 
 const initialState = { name: '', description: '' }
 
@@ -24,7 +27,9 @@ const Note = () => {
       const todoData = await API.graphql(graphqlOperation(listTodos))
       const todos = todoData.data.listTodos.items
       setTodos(todos)
-    } catch (err) { console.log('error fetching todos') }
+      console.log('here')
+      console.log(todos)
+    } catch (err) { console.log(err) }
   }
 
   async function addTodo() {
@@ -34,6 +39,7 @@ const Note = () => {
       setTodos([...todos, todo])
       setFormState(initialState)
       await API.graphql(graphqlOperation(createTodo, {input: todo}))
+      console.log('post added')
     } catch (err) {
       console.log('error creating todo:', err)
     }
