@@ -3,7 +3,10 @@ import React, { useEffect, useState } from 'react'
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
 import { createTodo, updateTodo, deleteTodo } from '../src/graphql/mutations';
 import { listTodos } from '../src/graphql/queries';
+import ReactMarkdown from 'react-markdown'
 import awsmobile from "../src/aws-exports";
+
+
 Amplify.configure(awsmobile);
 
 
@@ -45,6 +48,7 @@ const Note = () => {
     }
   }
 
+
   return (
     <div style={styles.container}>
       <h2> Posts </h2>
@@ -65,7 +69,13 @@ const Note = () => {
         todos.map((todo, index) => (
           <div key={todo.id ? todo.id : index} style={styles.todo}>
             <p style={styles.todoName}>{todo.name}</p>
-            <p style={styles.todoDescription}>{todo.description}</p>
+            <p style={styles.todoDescription}> </p>
+            <div>
+            
+       {
+           <ReactMarkdown childern={todo.description}/>
+       }
+              </div>
           </div>
         ))
       }
