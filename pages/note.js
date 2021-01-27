@@ -73,7 +73,7 @@ const Note = () => {
             <div>
             
        {
-           <ReactMarkdown childern={todo.description}/>
+           <ReactMarkdown children={todo.description}/>
        }
               </div>
           </div>
